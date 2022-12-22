@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS Assignment Promises</title>
+  </head>
+  <body>
+    <script src="./script.js"></script>
+    <pre>
+
+        <center><h1> JS Coding Assignment : Promises Async Await</h1></center>
+        <h2>1.  Question 1</h2>
+
+        Write one example explaining how you can write a callback function.
+
+        >> Answer
+
+        <textarea>
+            
+          function outFunc(callFunc) {
+            console.log("Outer Function Printed");
+            callFunc();
+          }
+          
+          function innerFunc() {
+            console.log('Inner Function Printed');
+          }
+          
+          outFunc(innerFunc);
+          
+          // Output - Outer Function Printed
+          //         Inner Function Printed
+
+
+          Explanation :- A function that is passed as an argument to another function and 
+          is executed after the outer function has completed is a callback function.
+          Here,  The innerFunc() is passed as the callback and will be executed after the 
+          outFunc() has completed.
+
+        </textarea>
+    
+    <h2> 2. Question 2</h2>
+
+    Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 
+    2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+    Explain callback hell.
+
+    Numbers
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+
+    >> Answer
+
+       <textarea>
+  
+ function printN(callbck) {
+    setTimeout(function() {
+      console.log(1);
+      setTimeout(function() {
+        console.log(2);
+        setTimeout(function() {
+          console.log(3);
+          setTimeout(function() {
+            console.log(4)
+            setTimeout(function() {
+              console.log(5)
+              setTimeout(function() {
+                console.log(6)
+                setTimeout(function() {
+                  console.log(7)
+                }, 7 * 1000);
+              }, 6 * 1000);
+            }, 5 * 1000);
+          }, 4 * 1000);
+        }, 3 * 1000);
+      }, 2 * 1000);
+    }, 1 * 1000);
+  }
+
+  printN();
+
+  Output :- // 1 to 7 will be printed after a delay equal to the number itself.
+
+  Explanation of callback hell :- in the above code,the nested structure of the 
+  callback functions can make the code difficult to understand and debug.
+  This is called as a callback hell.
+
+    </textarea>
+
+
+
+        <h2>3. Question 3</h2>
+
+        Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 
+        2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7
+
+            >> Answer
+
+            <textarea style="width: 800px;height: 330px;">
+            
+              async function printN() {
+                for (let i = 1; i <= 7; i++) {
+                  await new Promise(resolve => setTimeout(resolve, 1000 * i));
+                  console.log(i);
+                }
+              }
+              printN();
+        
+              Output :- // 1 to 7 will be printed after a delay equal to the number itself.
+
+        </textarea>
+
+    <h2>4. Question 4</h2>
+
+    Create a promise function accepting an argument, if yes is passed to the function then 
+    it should go to resolved state and print Promise Resolved, and if nothing is passed 
+    then it should go to reject the state and catch the error and print Promise Rejected.
+
+    >> Answer
+
+    <textarea>
+        
+      function argPromise(arg) {
+        return new Promise((resolve, reject) => {
+          if (arg === 'yes') {
+            resolve('Promise Resolved');
+          } else {
+            reject(new Error('Promise Rejected'));
+          }
+        });
+      }
+      argPromise('yes').then(res => {
+        console.log(res);
+      }).catch(error => {
+        console.log(error.message);
+      });
+
+      Output :- Promise Resolved.
+      
+    </textarea>
+
+    <h2>5. Question 5</h2>
+
+    Create examples to explain callback function
+
+    >> Answer
+
+    <textarea>
+    
+      // Example 1
+
+      function outFunc(callFunc) {
+        console.log("Outer Function Printed");
+        callFunc();
+      }
+      
+      function innerFunc() {
+        console.log('Inner Function Printed');
+      }
+      
+      outFunc(innerFunc);
+
+      Output - Outer Function Printed
+               Inner Function Printed
+      
+      // Example 2
+      
+      function sum(x, y, callbackFunc) {
+        const res = x + y;
+        callbackFunc(res);
+      }
+      
+      function ressum(res) {
+        console.log("Total Sum is: " + res);
+      }
+      
+      sum(22, 5, ressum);
+
+      Output:- Total sum is 27
+      
+    </textarea>
+    
+    <h2>6. Question 6</h2>
+
+    Create examples to explain callback hell function
+
+    >> Answer
+
+    <textarea style="width: 800px;height: 800px;">
+    
+      // Example 1
+
+function printN(callbck) {
+  setTimeout(function() {
+    console.log(1);
+    setTimeout(function() {
+      console.log(2);
+      setTimeout(function() {
+        console.log(3);
+        setTimeout(function() {
+          console.log(4)
+          setTimeout(function() {
+            console.log(5)
+            setTimeout(function() {
+              console.log(6)
+              setTimeout(function() {
+                console.log(7)
+              }, 7 * 1000);
+            }, 6 * 1000);
+          }, 5 * 1000);
+        }, 4 * 1000);
+      }, 3 * 1000);
+    }, 2 * 1000);
+  }, 1 * 1000);
+}
+
+printN();
+
+  // Output :- 1 to 7 will be printed after a delay equal to the number itself.
+  //           This is a callback hell function.
+
+  // Example 2
+
+  function sum(x, y, callbackFunc) {
+    var res = x + y;
+    callbackFunc(res);
+  }
+
+  sum(45, 44, function(res) {
+    console.log("Sum is" , res); 
+  })
+
+  //  Output :-  Sum is 89
+      
+    </textarea>
+
+    <h2>7. Question 7</h2>
+
+    Create examples to explain promises function
+
+    >> Answer
+
+    <textarea>
+    
+      // Example 1
+
+  async function printN() {
+    for (let i = 1; i <= 7; i++) {
+      await new Promise(resolve => setTimeout(resolve, 1000 * i));
+      console.log(i);
+    }
+  }
+  printN();
+
+  // Output :- // 1 to 7 will be printed after a delay equal to the number itself.
+
+  // Example 2
+
+  function add(x, y) {
+    return new Promise(function(resolve, reject) {
+      var res = x + y;
+      resolve(res);
+    });
+  }
+
+  add(55, 32)
+    .then(function(res) {
+      console.log(res); 
+    });
+
+    // Output :- 87                
+      
+    </textarea>
+
+    <h2>8. Question 8</h2>
+
+    Create examples to explain async await function
+
+    >> Answer
+
+    <textarea>
+    
+      // Example 1
+
+      async function add(x, y) {
+        return x + y;
+      }
+      
+      async function outp() {
+        const res = await add(41, 42);
+        console.log(res); 
+      }
+      
+      outp();
+      
+      // Ouput :- 83
+      
+      // Example 2
+      
+      async function getStudent(id) {
+        return { id: id, name: "Rakesh" };
+      }
+      
+      async function finp() {
+        const user = await getStudent(5);
+        console.log(user); 
+      }
+      
+      finp();
+      
+      // Output :- { id: 1, name: 'Rakesh' }
+
+    </textarea>
+
+    <h2>9. Question 9</h2>
+
+    Create examples to explain promise.all function
+
+    >> Answer
+
+    <textarea>
+    
+      // Example
+
+  function add(x, y) {
+    return new Promise(function(resolve, reject) {
+      var res = x + y;
+      resolve(res);
+    });
+  }
+
+  Promise.all([
+    add(41, 40),
+    add(55, 5)
+  ]).then(function(res1) {
+    console.log(res1[0]);
+    console.log(res1[1]); 
+  });
+
+  // Ouput :- 81,60
+  
+    </textarea>
+    </pre>
+  </body>
+</html>
